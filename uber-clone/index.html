@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Connect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: url('https://images.pexels.com/photos/3765590/pexels-photo-3765590.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg min-h-screen flex items-center">
+            <div class="container mx-auto px-4 text-white text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Connecting Donors with Those in Need</h1>
+                <p class="text-xl mb-8">Find blood donors near you in minutes</p>
+                <div class="mb-12 bg-white/90 p-4 rounded-lg shadow">
+                    <div class="h-48 bg-gray-200 rounded-lg flex items-center justify-center">
+                        <p class="text-gray-500">[Map showing nearby donors would display here]</p>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white/90 p-6 rounded-lg text-gray-800">
+                        <h2 class="text-2xl font-bold mb-4 text-red-600">Need Blood?</h2>
+                        <form id="requestForm" class="space-y-4">
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border" required>
+                            <select class="w-full px-4 py-3 rounded-lg border" required>
+                                <option value="">Select Blood Group</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                            <input type="text" placeholder="Your Location" class="w-full px-4 py-3 rounded-lg border" required>
+                            <input type="tel" placeholder="Contact Number" class="w-full px-4 py-3 rounded-lg border" required>
+                            <button type="submit" class="w-full bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition">Request Blood</button>
+                        </form>
+                    </div>
+                    <div class="bg-white/90 p-6 rounded-lg text-gray-800">
+                        <h2 class="text-2xl font-bold mb-4 text-red-600">Be a Donor</h2>
+                        <form id="donorForm" class="space-y-4">
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg border" required>
+                            <select class="w-full px-4 py-3 rounded-lg border" required>
+                                <option value="">Select Blood Group</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                            <input type="text" placeholder="Your Location" class="w-full px-4 py-3 rounded-lg border" required>
+                            <input type="tel" placeholder="Contact Number" class="w-full px-4 py-3 rounded-lg border" required>
+                            <button type="submit" class="w-full bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">Register as Donor</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Donor Map Section -->
+        <section class="py-12">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center">Donors Near You</h2>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="h-96 bg-gray-200 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center p-6 bg-white/90 rounded-lg">
+                                <i class="fas fa-map-marker-alt text-4xl text-red-600 mb-4"></i>
+                                <h3 class="text-xl font-semibold mb-2">Live Donor Map</h3>
+                                <p class="text-gray-600 mb-4">View available donors in your area</p>
+                                <button class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                                    View Map
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-medium">5 Available Donors</h3>
+                                <p class="text-sm text-gray-600">Within 10 miles of your location</p>
+                            </div>
+                            <a href="/donor-dashboard.html" class="text-red-600 hover:underline">See All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center">How It Works</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-red-600 text-4xl mb-4">1</div>
+                        <h3 class="text-xl font-semibold mb-2">Request Blood</h3>
+                        <p>Fill out the request form with your blood type and location</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-red-600 text-4xl mb-4">2</div>
+                        <h3 class="text-xl font-semibold mb-2">Find a Match</h3>
+                        <p>Our system connects you with nearby compatible donors</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow text-center">
+                        <div class="text-red-600 text-4xl mb-4">3</div>
+                        <h3 class="text-xl font-semibold mb-2">Save a Life</h3>
+                        <p>Connect with the donor to arrange the donation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load navigation and footer
+        fetch('/partials/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+        
+        fetch('/partials/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        // Form submission handlers
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Blood request submitted! We will contact you shortly.');
+            this.reset();
+        });
+
+        document.getElementById('donorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for registering as a donor! You may be contacted soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
