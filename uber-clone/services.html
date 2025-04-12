@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Uber Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="font-sans">
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-8">Our Services</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <i class="fas fa-car text-4xl mb-4 text-black"></i>
+                <h2 class="text-xl font-semibold mb-2">Ride</h2>
+                <p class="mb-4">Request a ride to get where you're going.</p>
+                <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <i class="fas fa-utensils text-4xl mb-4 text-black"></i>
+                <h2 class="text-xl font-semibold mb-2">Eat</h2>
+                <p class="mb-4">Order food from your favorite restaurants.</p>
+                <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <i class="fas fa-truck text-4xl mb-4 text-black"></i>
+                <h2 class="text-xl font-semibold mb-2">Freight</h2>
+                <p class="mb-4">Ship your goods with reliable logistics.</p>
+                <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load navigation and footer
+        fetch('/partials/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+        
+        fetch('/partials/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+</body>
+</html>
