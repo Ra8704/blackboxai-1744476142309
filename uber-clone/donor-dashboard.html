@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard | Blood Connect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="font-sans bg-gray-100">
+    <!-- Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-bold text-red-600">Donor Dashboard</h1>
+                <div class="flex items-center space-x-4">
+                    <a href="/profile.html" class="flex items-center space-x-2 hover:text-red-600">
+                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                            Blood Group: <span id="donorBloodGroup">O+</span>
+                        </span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-full text-sm font-medium">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            <span id="donorLocation">New York</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4 border-b">
+                    <h2 class="text-xl font-semibold">Available Blood Requests</h2>
+                    <p class="text-gray-600">These requests match your blood type and location</p>
+                </div>
+
+                <div class="divide-y">
+                    <!-- Request 1 -->
+                    <div class="p-4 hover:bg-gray-50 transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-medium">Emergency Request</h3>
+                                <p class="text-gray-600">St. Mary's Hospital, 5 miles away</p>
+                                <div class="mt-2 flex items-center space-x-4">
+                                    <span class="bg-red-100 text-red-800 px-2 py-0.5 rounded-full text-xs font-medium">
+                                        Blood Group: A+
+                                    </span>
+                                    <span class="text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i> Needed within 2 hours
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="respond-btn bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed"
+                                    title="You cannot donate again until 3 months after your last donation">
+                                On Cooldown
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Request 2 -->
+                    <div class="p-4 hover:bg-gray-50 transition">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-medium">Scheduled Surgery</h3>
+                                <p class="text-gray-600">City General Hospital, 8 miles away</p>
+                                <div class="mt-2 flex items-center space-x-4">
+                                    <span class="bg-red-100 text-red-800 px-2 py-0.5 rounded-full text-xs font-medium">
+                                        Blood Group: O+
+                                    </span>
+                                    <span class="text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i> Needed within 24 hours
+                                    </span>
+                                </div>
+                            </div>
+                            <button class="respond-btn bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                                    data-location="City General Hospital" 
+                                    data-distance="8 miles"
+                                    data-eta="25 min">
+                                Respond
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Map Modal -->
+    <div id="mapModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg w-full max-w-2xl">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h2 class="text-xl font-bold">Donation in Progress</h2>
+                <button id="closeMap" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-4">
+                <div class="h-64 bg-gray-200 rounded-lg mb-4 flex items-center justify-center">
+                    <p class="text-gray-500">[Map would display here showing route]</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <h3 class="font-semibold">From:</h3>
+                        <p id="currentLocation">Current Location</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">To:</h3>
+                        <p id="destinationLocation">Hospital Location</p>
+                    </div>
+                </div>
+                <div class="bg-blue-50 p-3 rounded-lg">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-clock text-blue-600"></i>
+                        <span>Estimated arrival time: <span id="etaTime" class="font-semibold">15 minutes</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load navigation and footer
+        fetch('/partials/navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('nav-placeholder').innerHTML = data;
+            });
+        
+        fetch('/partials/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        // Handle respond button clicks
+        document.querySelectorAll('.respond-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const location = this.getAttribute('data-location');
+                const distance = this.getAttribute('data-distance');
+                const eta = this.getAttribute('data-eta');
+                
+                // Update modal with request details
+                document.getElementById('destinationLocation').textContent = location;
+                document.getElementById('etaTime').textContent = eta;
+                
+                // Show modal
+                document.getElementById('mapModal').classList.remove('hidden');
+            });
+        });
+
+        // Close modal
+        document.getElementById('closeMap').addEventListener('click', function() {
+            document.getElementById('mapModal').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
