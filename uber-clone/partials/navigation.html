@@ -1,0 +1,80 @@
+<nav class="bg-black text-white p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/index.html" class="text-xl font-bold text-red-600">BLOOD CONNECT</a>
+        <div class="hidden md:flex items-center space-x-6">
+            <a href="/index.html" class="hover:text-gray-300">Home</a>
+            <a href="/request.html" class="hover:text-gray-300">Request Blood</a>
+            <a href="/donor-dashboard.html" class="hover:text-gray-300">Donor Dashboard</a>
+            <a href="/about.html" class="hover:text-gray-300">About</a>
+            <div class="flex items-center space-x-4 ml-4">
+                    <div class="flex items-center space-x-6">
+                        <div class="relative group">
+                            <a href="/notifications.html" class="flex items-center space-x-2 hover:text-gray-300">
+                                <div class="relative">
+                                    <i class="fas fa-bell text-xl"></i>
+                                    <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                                </div>
+                                <span>Notifications</span>
+                            </a>
+                            <!-- Notification dropdown -->
+                            <div class="hidden group-hover:block absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50">
+                                <div class="p-2 border-b">
+                                    <h4 class="font-semibold">Recent Notifications</h4>
+                                </div>
+                                <div class="divide-y">
+                                    <a href="#" class="block p-3 hover:bg-gray-100">
+                                        <p class="text-sm">New blood request near you</p>
+                                        <p class="text-xs text-gray-500">2 minutes ago</p>
+                                    </a>
+                                    <a href="#" class="block p-3 hover:bg-gray-100">
+                                        <p class="text-sm">Your donation helped save a life!</p>
+                                        <p class="text-xs text-gray-500">1 day ago</p>
+                                    </a>
+                                </div>
+                                <div class="p-2 bg-gray-50 text-center">
+                                    <a href="/notifications.html" class="text-sm text-red-600 hover:underline">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/profile.html" class="flex items-center space-x-2 hover:text-gray-300">
+                            <i class="fas fa-user-circle text-xl"></i>
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                <a href="/login.html" class="bg-gray-200 text-black px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+            </div>
+        </div>
+        <button class="md:hidden">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<script>
+    // Toggle notification dropdown
+    document.addEventListener('DOMContentLoaded', function() {
+        const notificationBtn = document.querySelector('.group');
+        
+        notificationBtn.addEventListener('click', function(e) {
+            if (e.target.closest('a')) {
+                const dropdown = this.querySelector('.hidden');
+                dropdown.classList.toggle('hidden');
+                e.preventDefault();
+            }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.group')) {
+                const openDropdowns = document.querySelectorAll('.group .hidden');
+                openDropdowns.forEach(dropdown => {
+                    if (!dropdown.classList.contains('hidden')) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    });
+</script>
